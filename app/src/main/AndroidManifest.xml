@@ -3,7 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.amosh.electricchargingspots">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- Required only when requesting background location access on Android 10 (API level 29). -->
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+
+
     <application
+        android:name=".MyApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -12,6 +20,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ElectricChargingSpots"
-        tools:targetApi="31" />
+        tools:targetApi="31" >
+
+        <activity
+            android:name="com.amosh.feature.ui.MainActivity"
+            android:exported="true" />
+
+        <activity
+            android:name="com.amosh.feature.ui.SplashScreenActivity"
+            android:theme="@style/SplashTheme"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+
+    </application>
 
 </manifest>

@@ -42,4 +42,6 @@ dependencies {
     api "androidx.recyclerview:recyclerview:1.2.1"
     // JetPack
     api "androidx.fragment:fragment-ktx:1.4.1"
+    // Alerter
+    api 'com.github.tapadoo:alerter:7.2.4'
 }

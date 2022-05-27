@@ -1,9 +1,13 @@
 package com.amosh.base
 
+import android.Manifest
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
+import com.amosh.common.AppMessage
+import com.amosh.common.addIfNotExistAndNotNull
+import com.tapadoo.alerter.Alerter
 
 /**
  * Base class for all [AppCompatActivity] instances
@@ -30,4 +34,13 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
         super.onDestroy()
     }
 
+    fun showAppMessage(message: AppMessage, duration: Long = 3000L) {
+        Alerter.create(this)
+            .setDuration(duration)
+            .setBackgroundColorRes(message.getMessageColor())
+            .setText(message.message)
+            .setTextAppearance(R.style.AppMessageStyle)
+            .hideIcon()
+            .show()
+    }
 }

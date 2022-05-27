@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/_36sdp"
+        android:paddingEnd="@dimen/_8sdp"
+        android:paddingStart="@dimen/_8sdp"
+        android:paddingTop="@dimen/_8sdp">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnMap"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:background="@color/purple_200"
+            android:padding="@dimen/_4sdp"
+            android:src="@drawable/ic_ev_point_station"
+            android:tint="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/brLabels"
+            app:layout_constraintTop_toBottomOf="@id/lblFixed" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:tint="@color/purple_200"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_ev_charger" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/brLabels"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="end"
+            app:constraint_referenced_ids="lblAddress, lblDistance,lblPhone, lblConnectorsNumber,lblCapacity, lblMaxPower,lblFixed,lblConnectorsType" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_16sdp"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_16ssp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivIcon"
+            tools:text="Name" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/lblAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_2sdp"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:text="Address: "
+            android:textColor="@android:color/darker_gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvName" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvAddress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:gravity="end"
+            android:textColor="@android:color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/brLabels"
+            app:layout_constraintTop_toTopOf="@id/lblAddress"
+            tools:text="charger name" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/lblPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_2sdp"
+            android:text="Phone: "
+            android:textColor="@android:color/darker_gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lblAddress" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvPhone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:gravity="end"
+            android:textColor="@android:color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/brLabels"
+            app:layout_constraintTop_toTopOf="@id/lblPhone"
+            tools:text="01087457344" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/lblDistance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_2sdp"
+            android:text="Distance: "
+            android:textColor="@android:color/darker_gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lblPhone" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvDistance"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:gravity="end"
+            android:textColor="@android:color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/brLabels"
+            app:layout_constraintTop_toTopOf="@id/lblDistance"
+            tools:text="12 KM" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/lblConnectorsNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_2sdp"
+            android:text="Connectors No.: "
+            android:textColor="@android:color/darker_gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lblDistance" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvConnectorsNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:gravity="end"
+            android:textColor="@android:color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/brLabels"
+            app:layout_constraintTop_toTopOf="@id/lblConnectorsNumber"
+            tools:text="3" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/lblConnectorsType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_2sdp"
+            android:text="Connectors Type: "
+            android:textColor="@android:color/darker_gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lblConnectorsNumber" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvConnectorsType"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:gravity="end"
+            android:textColor="@android:color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/brLabels"
+            app:layout_constraintTop_toTopOf="@id/lblConnectorsType"
+            tools:text="type" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/lblCapacity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_2sdp"
+            android:text="Capacity: "
+            android:textColor="@android:color/darker_gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lblConnectorsType" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvCapacity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:gravity="end"
+            android:textColor="@android:color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/brLabels"
+            app:layout_constraintTop_toTopOf="@id/lblCapacity"
+            tools:text="40 A" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/lblMaxPower"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_2sdp"
+            android:text="Max Power: "
+            android:textColor="@android:color/darker_gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lblCapacity" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvMaxPower"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:gravity="end"
+            android:textColor="@android:color/holo_red_dark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/brLabels"
+            app:layout_constraintTop_toTopOf="@id/lblMaxPower"
+            tools:text="100" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/lblFixed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_2sdp"
+            android:text="Fixed Cable: "
+            android:textColor="@android:color/darker_gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lblMaxPower" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvFixed"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:gravity="end"
+            android:textColor="@android:color/holo_green_dark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/brLabels"
+            app:layout_constraintTop_toTopOf="@id/lblFixed"
+            tools:text="true" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/lblLocate"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_2sdp"
+            android:gravity="center"
+            android:text="Locate on Map: "
+            android:textColor="@color/purple_200"
+            app:layout_constraintBottom_toBottomOf="@id/btnMap"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/btnMap" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
