@@ -33,5 +33,5 @@ object PersistenceModule {
      */
     @Provides
     @Singleton
-    fun provideMovieDAO(appDatabase: AppDatabase) = appDatabase.spotsDao()
+    fun provideChargerSpotsDAO(appDatabase: AppDatabase) = appDatabase.spotsDao()
 }

@@ -17,6 +17,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdk
         versionCode generateVersionCode()
         versionName generateVersionName()
+        flavorDimensions "default"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -27,6 +28,21 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    productFlavors {
+        dev {
+            //dev/local
+            buildConfigField "String", "BASE_URL", '"https://ev-v2.cc.api.here.com"'
+            buildConfigField "String", "AUTH_TOKEN", '"URox4UifAIHJulkg9pOINw"'
+        }
+        production {
+            //production url
+            buildConfigField "String", "BASE_URL", '"https://ev-v2.cc.api.here.com"'
+            buildConfigField "String", "AUTH_TOKEN", '"URox4UifAIHJulkg9pOINw"'
+        }
+    }
+
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8

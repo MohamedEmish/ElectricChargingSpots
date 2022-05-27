@@ -1,6 +1,6 @@
 package com.amosh.electricchargingspots.di
 
-import com.amosh.data.BuildConfig
+import com.amosh.electricchargingspots.BuildConfig
 import com.amosh.remote.api.ApiService
 import com.ihsanbal.logging.Level
 import com.ihsanbal.logging.LoggingInterceptor
@@ -60,7 +60,7 @@ object NetworkModule {
     fun provideRetrofitTest(okHttpClient: OkHttpClient): Retrofit {
         val contentType = "application/json".toMediaType()
         return Retrofit.Builder()
-            .baseUrl("https://api.themoviedb.org/3/")
+            .baseUrl(BuildConfig.BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

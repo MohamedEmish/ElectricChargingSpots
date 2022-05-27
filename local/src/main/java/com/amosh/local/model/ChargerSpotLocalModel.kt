@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "spots")
-data class SpotLocalModel(
+data class ChargerSpotLocalModel(
     @PrimaryKey
     val id: Int
 )

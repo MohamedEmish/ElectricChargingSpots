@@ -1,5 +1,5 @@
 package com.amosh.domain.entity
 
-data class SpotEntity(
+data class ChargerSpotEntity(
     val id: Int? = null,
 )

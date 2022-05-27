@@ -1,5 +1,5 @@
 package com.amosh.data.model
 
-data class SpotDTO(
+data class ChargerSpotDTO(
     val id: Int? = null,
 )
