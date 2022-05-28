@@ -1,15 +1,21 @@
 package com.amosh.feature.ui
 
+import android.os.Build.VERSION_CODES.S
 import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.amosh.base.BaseViewModel
+import com.amosh.common.Constants
 import com.amosh.common.Mapper
+import com.amosh.common.Resource
+import com.amosh.common.addIfNotExist
 import com.amosh.domain.entity.ChargerSpotEntity
 import com.amosh.domain.userCase.GetChargerSpotsUseCase
 import com.amosh.feature.model.ChargerSpotUiModel
 import com.amosh.feature.ui.contract.MainContract
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.random.Random
@@ -38,6 +44,40 @@ class MainViewModel @Inject constructor(
     }
 
     private fun fetchSpotsList(lat: Double, lng: Double) = viewModelScope.launch {
-        Log.d("fetchSpotsList", "lat: $lat lng: $lng")
+        getChargerSpotsUseCase.execute(
+            mapOf(
+                Constants.LATITUDE to lat,
+                Constants.LONGITUDE to lng
+            )
+        )
+            .onStart { emit(Resource.Loading) }
+            .collect {
+                when (it) {
+                    is Resource.Empty -> {
+                        setState { copy(spotsState = MainContract.SpotState.Idle) }
+                    }
+                    is Resource.Error -> {
+                        setEffect { MainContract.Effect.ShowError(message = it.exception.message) }
+                    }
+                    is Resource.Loading -> {
+                        setState { copy(spotsState = MainContract.SpotState.Loading) }
+                    }
+                    is Resource.Success -> {
+                        val spotsList = spotsMapper.fromList(it.data)
+                        currentPage += 1
+                        spotsList.forEach { spot ->
+                            listOfSpots.addIfNotExist(spot)
+                        }
+
+                        setState {
+                            copy(
+                                spotsState = MainContract.SpotState.Success(
+                                    spotList = listOfSpots
+                                )
+                            )
+                        }
+                    }
+                }
+            }
     }
 }

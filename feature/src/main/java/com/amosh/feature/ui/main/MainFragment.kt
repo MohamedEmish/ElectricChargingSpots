@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.os.Looper
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -13,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.amosh.base.BaseFragment
+import com.amosh.common.AppMessage
 import com.amosh.common.isOffline
 import com.amosh.feature.databinding.FragmentMainBinding
 import com.amosh.feature.ui.MainViewModel
@@ -70,7 +70,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
                             binding.pbProgress.isVisible = false
                         }
                         is MainContract.SpotState.Loading -> {
-                            binding.pbProgress.isVisible = true
+                            binding.pbProgress.isVisible = adapter.itemCount == 0
                         }
                         is MainContract.SpotState.Success -> {
                             val data = state.spotList
@@ -89,15 +89,20 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
                     when (it) {
                         is MainContract.Effect.ShowError -> {
                             if (requireContext().isOffline()) {
-                                Toast.makeText(
-                                    requireContext(),
-                                    "No internet connection, please try again later",
-                                    Toast.LENGTH_SHORT
+                                showAppMessage(
+                                    AppMessage(
+                                        AppMessage.FAILURE,
+                                        "No internet connection, please try again later"
+                                    )
                                 )
-                                    .show()
-                            } else
-                                Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT)
-                                    .show()
+                            } else {
+                                showAppMessage(
+                                    AppMessage(
+                                        AppMessage.FAILURE,
+                                        it.message ?: "no message"
+                                    )
+                                )
+                            }
                         }
                     }
                 }
@@ -133,6 +138,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
                 }
             }
         }
+        startLocationUpdates()
     }
 
     //start location updates
@@ -155,11 +161,6 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
         stopLocationUpdates()
     }
 
-    // start receiving location update when activity  visible/foreground
-    override fun onResume() {
-        super.onResume()
-        startLocationUpdates()
-    }
 }
 
 

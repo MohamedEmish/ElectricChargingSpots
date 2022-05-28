@@ -9,6 +9,7 @@ import com.amosh.domain.repository.Repository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
+import kotlin.math.ln
 
 /**
  * Implementation class of [Repository]
@@ -24,11 +25,24 @@ class RepositoryImp @Inject constructor(
         return flow {
             try {
                 // Get data from RemoteDataSource
-
+                val data = remoteDataSource.getChargingSpots(
+                    lat = lat,
+                    lng = lng
+                )
                 // Emit data
-                val resultList: MutableList<ChargerSpotEntity> = mutableListOf()
-
-                emit(Resource.Success(resultList))
+                when (data) {
+                    is Resource.Error -> {
+                        emit(Resource.Error(data.exception))
+                    }
+                    is Resource.Success -> {
+                        val resultList: MutableList<ChargerSpotEntity> = mutableListOf()
+                        data.data.forEach {
+                            resultList.add(spotMapper.from(it))
+                        }
+                        emit(Resource.Success(resultList))
+                    }
+                    else -> emit(Resource.Empty)
+                }
             } catch (ex: Exception) {
                 emit(Resource.Error(ex))
                 // If remote request fails

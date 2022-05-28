@@ -11,20 +11,12 @@ class ChargingSpotDomainUiMapper @Inject constructor() : Mapper<ChargerSpotEntit
         return ChargerSpotUiModel(
             id = i?.id,
             name = i?.name,
-            distance = i?.distance,
-            contactPhone = i?.contactPhone,
             latitude = i?.latitude,
             longitude = i?.longitude,
             address = i?.address,
             numberOfConnectors = i?.numberOfConnectors,
-            connectors = ChargerConnectorUiModel(
-                supplierName = i?.supplierName,
-                chargeCapacity = i?.chargeCapacity,
-                maxPowerLevel = i?.maxPowerLevel,
-                customerChargeLevel = i?.customerChargeLevel,
-                customerConnectorName = i?.customerConnectorName,
-                fixedCable = i?.fixedCable
-            )
+            maxPowerLevel = i?.maxPowerLevel,
+            distance = i?.distance
         )
     }
 
@@ -32,19 +24,12 @@ class ChargingSpotDomainUiMapper @Inject constructor() : Mapper<ChargerSpotEntit
         return ChargerSpotEntity(
             id = o?.id,
             name = o?.name,
-            distance = o?.distance,
-            contactPhone = o?.contactPhone,
             latitude = o?.latitude,
             longitude = o?.longitude,
             address = o?.address,
             numberOfConnectors = o?.numberOfConnectors,
-            supplierName = o?.connectors?.supplierName,
-            chargeCapacity = o?.connectors?.chargeCapacity,
-            maxPowerLevel = o?.connectors?.maxPowerLevel,
-            customerChargeLevel = o?.connectors?.customerChargeLevel,
-            customerConnectorName = o?.connectors?.customerConnectorName,
-            fixedCable = o?.connectors?.fixedCable
+            maxPowerLevel = o?.maxPowerLevel,
+            distance = o?.distance
         )
     }
-
 }

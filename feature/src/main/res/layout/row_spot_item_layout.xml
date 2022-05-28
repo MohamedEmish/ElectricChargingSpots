@@ -5,17 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/_8sdp"
-    android:padding="@dimen/_8sdp">
+    android:padding="@dimen/_8sdp"
+    app:cardBackgroundColor="@color/white">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivIcon"
             android:layout_width="@dimen/_48sdp"
             android:layout_height="@dimen/_48sdp"
             android:layout_marginTop="@dimen/_8sdp"
+            android:padding="@dimen/_8sdp"
             android:tint="@color/purple_200"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -59,7 +62,7 @@
             android:text="Address: "
             android:textColor="@android:color/darker_gray"
             app:layout_constraintStart_toEndOf="@id/ivIcon"
-            app:layout_constraintTop_toBottomOf="@id/lblName" />
+            app:layout_constraintTop_toBottomOf="@id/tvName" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvAddress"
@@ -82,7 +85,7 @@
             android:text="Distance: "
             android:textColor="@android:color/darker_gray"
             app:layout_constraintStart_toEndOf="@id/ivIcon"
-            app:layout_constraintTop_toBottomOf="@id/lblAddress" />
+            app:layout_constraintTop_toBottomOf="@id/tvAddress" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvDistance"
@@ -105,7 +108,7 @@
             android:text="Connectors No.: "
             android:textColor="@android:color/darker_gray"
             app:layout_constraintStart_toEndOf="@id/ivIcon"
-            app:layout_constraintTop_toBottomOf="@id/lblDistance" />
+            app:layout_constraintTop_toBottomOf="@id/tvDistance" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvConnectorsNumber"

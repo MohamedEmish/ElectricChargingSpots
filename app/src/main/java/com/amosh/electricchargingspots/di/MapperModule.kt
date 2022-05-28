@@ -10,7 +10,6 @@ import com.amosh.local.mapper.ChargingSpotLocalDataMapper
 import com.amosh.local.model.ChargerSpotLocalModel
 import com.amosh.remote.mapper.SpotNetworkMapper
 import com.amosh.remote.model.SpotsNetworkResponse
-import com.amosh.remote.model.Station
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -41,7 +40,7 @@ abstract class MapperModule {
 
     //region Remote Mappers
     @Binds
-    abstract fun bindsSpotNetworkMapper(mapper: SpotNetworkMapper): Mapper<Station, ChargerSpotDTO>
+    abstract fun bindsSpotNetworkMapper(mapper: SpotNetworkMapper): Mapper<SpotsNetworkResponse, ChargerSpotDTO>
     //endregion
 
 }

@@ -1,12 +1,15 @@
 package com.amosh.remote.model
 
 data class StationAddress(
-    val city: String? = null,
-    val country: String? = null,
-    val region: String? = null,
-    val street: String? = null,
-    val streetNumber: String? = null,
-    val postalCode: String? = null,
+    val ID: Long? = null,
+    val Title: String? = null,
+    val AddressLine1: String? = null,
+    val Town: String? = null,
+    val StateOrProvince: String? = null,
+    val CountryID: Int? = null,
+    val Latitude: Double? = null,
+    val Longitude: Double? = null,
+    var Distance: Double? = null,
 ) {
-    fun getAddressString(): String = "$streetNumber $street $region $city"
+    fun getAddressString(): String = "$AddressLine1, $Town"
 }

@@ -32,13 +32,13 @@ android {
     productFlavors {
         dev {
             //dev/local
-            buildConfigField "String", "BASE_URL", '"https://ev-v2.cc.api.here.com"'
-            buildConfigField "String", "AUTH_TOKEN", '"URox4UifAIHJulkg9pOINw"'
+            buildConfigField "String", "BASE_URL", '"https://api.openchargemap.io/v3/"'
+            buildConfigField "String", "API_KEY", '"5b8890a8-8148-4bac-841a-673127645207"'
         }
         production {
             //production url
-            buildConfigField "String", "BASE_URL", '"https://ev-v2.cc.api.here.com"'
-            buildConfigField "String", "AUTH_TOKEN", '"URox4UifAIHJulkg9pOINw"'
+            buildConfigField "String", "BASE_URL", '"https://api.openchargemap.io/v3/"'
+            buildConfigField "String", "API_KEY", '"5b8890a8-8148-4bac-841a-673127645207"'
         }
     }
 
