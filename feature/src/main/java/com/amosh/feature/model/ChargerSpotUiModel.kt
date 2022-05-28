@@ -13,7 +13,7 @@ data class ChargerSpotUiModel(
     val longitude: Double? = null,
     val address: String? = null,
     val numberOfConnectors: Int? = null,
-    val connectors: List<ChargerConnectorUiModel>,
+    val connectors: ChargerConnectorUiModel,
 ) : Parcelable {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

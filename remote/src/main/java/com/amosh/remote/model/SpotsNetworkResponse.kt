@@ -1,5 +1,7 @@
 package com.amosh.remote.model
 
 data class SpotsNetworkResponse(
-    val id: Int? = null,
+    val hasMore: Boolean? = null,
+    val count: Int? = null,
+    val evStations: EvStations? = null,
 )

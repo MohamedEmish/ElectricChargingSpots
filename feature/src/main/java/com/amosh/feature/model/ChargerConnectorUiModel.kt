@@ -8,7 +8,7 @@ data class ChargerConnectorUiModel(
     val supplierName: String? = null,
     val chargeCapacity: String? = null,
     val maxPowerLevel: Double? = null,
-    val customerChargeLevel: Int? = null,
+    val customerChargeLevel: String? = null,
     val customerConnectorName: String? = null,
     val fixedCable: Boolean? = null,
 ) : Parcelable {
@@ -32,7 +32,7 @@ data class ChargerConnectorUiModel(
         var result = supplierName?.hashCode() ?: 0
         result = 31 * result + (chargeCapacity?.hashCode() ?: 0)
         result = 31 * result + (maxPowerLevel?.hashCode() ?: 0)
-        result = 31 * result + (customerChargeLevel ?: 0)
+        result = 31 * result + (customerChargeLevel?.hashCode() ?: 0)
         result = 31 * result + (customerConnectorName?.hashCode() ?: 0)
         result = 31 * result + (fixedCable?.hashCode() ?: 0)
         return result

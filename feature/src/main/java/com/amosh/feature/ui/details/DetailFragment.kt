@@ -30,26 +30,26 @@ class DetailFragment : BaseFragment<FragmentDetailsBinding>() {
         with(binding) {
             tvName.text = args.spot?.name
             tvAddress.text = args.spot?.address
-            tvCapacity.text = args.spot?.connectors?.get(0)?.chargeCapacity
+            tvCapacity.text = args.spot?.connectors?.chargeCapacity
             tvDistance.text = "${args.spot?.distance} KM"
             tvFixed.apply {
-                text = args.spot?.connectors?.get(0)?.fixedCable?.toString()
+                text = args.spot?.connectors?.fixedCable?.toString()
                 setTextColor(ContextCompat.getColor(requireContext(),
-                    when (args.spot?.connectors?.get(0)?.fixedCable) {
+                    when (args.spot?.connectors?.fixedCable) {
                         true -> android.R.color.holo_green_dark
                         else -> android.R.color.holo_red_dark
                     })
                 )
             }
             tvConnectorsNumber.text = args.spot?.numberOfConnectors?.toString()
-            tvConnectorsType.text = args.spot?.connectors?.get(0)?.customerConnectorName
+            tvConnectorsType.text = args.spot?.connectors?.customerConnectorName
             tvPhone.apply {
                 text = args.spot?.contactPhone
                 setOnClickListener {
                     requireActivity().callPhoneNumber(args.spot?.contactPhone ?: return@setOnClickListener)
                 }
             }
-            tvMaxPower.text = args.spot?.connectors?.get(0)?.maxPowerLevel?.toString()
+            tvMaxPower.text = args.spot?.connectors?.maxPowerLevel?.toString()
             btnMap.setOnClickListener {
                 requireActivity().openMapLocation(
                     lat = args.spot?.latitude ?: return@setOnClickListener,
