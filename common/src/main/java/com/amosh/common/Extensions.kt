@@ -7,6 +7,7 @@ import android.net.NetworkCapabilities
 import android.net.Uri
 import android.view.View
 import java.io.UnsupportedEncodingException
+import java.math.RoundingMode
 import java.net.URLEncoder
 import kotlin.math.acos
 import kotlin.math.cos
@@ -86,7 +87,7 @@ fun distance(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {
     dist = acos(dist)
     dist = rad2deg(dist)
     dist *= 60 * 1.1515
-    return dist / 1000
+    return (dist / 1000).toBigDecimal().setScale(2, RoundingMode.UP).toDouble()
 }
 
 private fun deg2rad(deg: Double): Double {

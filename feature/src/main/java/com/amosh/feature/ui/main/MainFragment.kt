@@ -74,7 +74,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
                         }
                         is MainContract.SpotState.Success -> {
                             val data = state.spotList
-                            adapter.submitList(data)
+                            adapter.submitList(data?.sortedBy { it -> it.distance })
+                            adapter.notifyDataSetChanged()
                             binding.emptyState.isVisible = data.isNullOrEmpty()
                             binding.pbProgress.isVisible = false
                         }

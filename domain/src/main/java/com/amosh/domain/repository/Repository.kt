@@ -9,4 +9,5 @@ import kotlinx.coroutines.flow.Flow
  */
 interface Repository {
     suspend fun getChargingSpots(lat: Double, lng: Double): Flow<Resource<List<ChargerSpotEntity>>>
+    suspend fun getLocalChargingSpots(): Flow<Resource<List<ChargerSpotEntity>>>
 }

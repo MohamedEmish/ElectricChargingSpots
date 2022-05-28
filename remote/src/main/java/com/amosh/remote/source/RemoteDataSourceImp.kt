@@ -24,18 +24,12 @@ class RemoteDataSourceImp @Inject constructor(
             latitude = lat.toInt(),
             longitude = lng.toInt(),
         )
-//        return when (networkData.error) {
-//            null -> {
-                val list: MutableList<ChargerSpotDTO> = mutableListOf()
-                networkData.forEach {
-                    it.AddressInfo?.Distance = distance(lat, lng, it.AddressInfo?.Latitude ?: Constants.DEFAULT_LAT, it.AddressInfo?.Longitude ?: Constants.DEFAULT_LNG)
-                    list.add(spotMapper.from(it))
-                }
-                return Resource.Success(list)
-//            }
-//            else -> {
-//                Resource.Error(Exception(networkData.error_description))
-//            }
-//        }
+        val list: MutableList<ChargerSpotDTO> = mutableListOf()
+        networkData.forEach {
+            it.AddressInfo?.Distance =
+                distance(lat, lng, it.AddressInfo?.Latitude ?: Constants.DEFAULT_LAT, it.AddressInfo?.Longitude ?: Constants.DEFAULT_LNG)
+            list.add(spotMapper.from(it))
+        }
+        return Resource.Success(list)
     }
 }

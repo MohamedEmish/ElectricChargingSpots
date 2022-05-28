@@ -15,6 +15,13 @@ class LocalDataSourceImp @Inject constructor(
     private val spotsDao: ChargerSpotsDao,
     private val spotMapper: Mapper<ChargerSpotLocalModel, ChargerSpotDTO>
 ) : LocalDataSource {
+    override suspend fun addItem(spot: ChargerSpotDTO): Long {
+        val spotLocalModel = spotMapper.to(spot)
+        return spotsDao.addSpot(spot = spotLocalModel)
+    }
 
-
+    override suspend fun getItems(): List<ChargerSpotDTO> {
+        val spotLocalList = spotsDao.getSpots()
+        return spotMapper.fromList(spotLocalList)
+    }
 }

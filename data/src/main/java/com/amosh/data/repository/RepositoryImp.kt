@@ -38,6 +38,7 @@ class RepositoryImp @Inject constructor(
                         val resultList: MutableList<ChargerSpotEntity> = mutableListOf()
                         data.data.forEach {
                             resultList.add(spotMapper.from(it))
+                            localDataSource.addItem(it)
                         }
                         emit(Resource.Success(resultList))
                     }
@@ -48,11 +49,12 @@ class RepositoryImp @Inject constructor(
                 // If remote request fails
                 try {
                     // Get data from LocalDataSource
-
+                    val local = localDataSource.getItems()
                     // Emit data
                     val resultList: MutableList<ChargerSpotEntity> = mutableListOf()
-
-
+                    local.forEach {
+                        resultList.add(spotMapper.from(it))
+                    }
                     emit(Resource.Success(resultList))
                 } catch (ex: Exception) {
                     // Emit error
@@ -61,5 +63,27 @@ class RepositoryImp @Inject constructor(
             }
         }
 
+    }
+
+    override suspend fun getLocalChargingSpots(): Flow<Resource<List<ChargerSpotEntity>>> {
+        return flow {
+            try {
+                // Get data from RemoteDataSource
+                val data = localDataSource.getItems()
+                if (data.isEmpty()) {
+                    emit(Resource.Empty)
+                } else {
+                    val resultList: MutableList<ChargerSpotEntity> = mutableListOf()
+                    data.forEach {
+                        resultList.add(spotMapper.from(it))
+                        localDataSource.addItem(it)
+                    }
+                    emit(Resource.Success(resultList))
+                }
+                // Emit data
+            } catch (ex: Exception) {
+                emit(Resource.Error(ex))
+            }
+        }
     }
 }
