@@ -1,5 +1,6 @@
 package com.amosh.feature.ui
 
+import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.amosh.base.BaseViewModel
@@ -11,6 +12,7 @@ import com.amosh.feature.ui.contract.MainContract
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.random.Random
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
@@ -29,19 +31,13 @@ class MainViewModel @Inject constructor(
         )
     }
 
-    init {
-        fetchSpotsList()
-    }
-
     override fun handleEvent(event: MainContract.Event) {
         when (event) {
-            is MainContract.Event.OnFetchSpotsList -> fetchSpotsList()
+            is MainContract.Event.OnFetchSpotsList -> fetchSpotsList(event.lat, event.lng)
         }
     }
 
-    private fun fetchSpotsList() = viewModelScope.launch {
-        // TODO :: ADD DATA SOURCE
+    private fun fetchSpotsList(lat: Double, lng: Double) = viewModelScope.launch {
+        Log.d("fetchSpotsList", "lat: $lat lng: $lng")
     }
-
 }
-

@@ -86,4 +86,7 @@ dependencies {
     // Scalable Units
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
     implementation 'com.intuit.ssp:ssp-android:1.0.6'
+
+    // google location
+    implementation 'com.google.android.gms:play-services-location:19.0.1'
 }

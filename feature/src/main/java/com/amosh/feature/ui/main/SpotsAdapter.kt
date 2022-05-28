@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import com.amosh.base.BaseRecyclerAdapter
 import com.amosh.base.BaseViewHolder
-import com.amosh.common.Constants
 import com.amosh.feature.databinding.RowSpotItemLayoutBinding
 import com.amosh.feature.model.ChargerSpotUiModel
 
@@ -15,7 +14,6 @@ import com.amosh.feature.model.ChargerSpotUiModel
  */
 class SpotsAdapter constructor(
     private val clickFunc: ((ChargerSpotUiModel?) -> Unit)? = null,
-    private val fetchNext: (() -> Unit)? = null,
 ) : BaseRecyclerAdapter<ChargerSpotUiModel, RowSpotItemLayoutBinding, SpotsAdapter.SpotViewHolder>(
     SpotItemDiffUtil()
 ) {
@@ -26,18 +24,14 @@ class SpotsAdapter constructor(
             false
         )
 
-        return SpotViewHolder(binding = binding, click = clickFunc, fetchNext = fetchNext)
+        return SpotViewHolder(binding = binding, click = clickFunc)
     }
 
     inner class SpotViewHolder(
         private val binding: RowSpotItemLayoutBinding,
         private val click: ((ChargerSpotUiModel?) -> Unit)? = null,
-        private val fetchNext: (() -> Unit)? = null,
     ) : BaseViewHolder<ChargerSpotUiModel, RowSpotItemLayoutBinding>(binding) {
         override fun bind() {
-            if ((currentList.size - 1) - absoluteAdapterPosition == Constants.LIST_BOTTOM_OFFSET)
-                fetchNext?.invoke()
-
             getRowItem()?.let {
                 with(binding) {
                     root.setOnClickListener {

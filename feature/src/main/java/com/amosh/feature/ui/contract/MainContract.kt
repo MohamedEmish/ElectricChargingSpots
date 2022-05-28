@@ -11,7 +11,7 @@ import com.amosh.feature.model.ChargerSpotUiModel
 class MainContract {
 
     sealed class Event : UiEvent {
-        object OnFetchSpotsList : Event()
+        data class OnFetchSpotsList(val lat: Double, val lng: Double) : Event()
     }
 
     data class State(

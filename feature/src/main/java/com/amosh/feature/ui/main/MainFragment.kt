@@ -1,6 +1,8 @@
 package com.amosh.feature.ui.main
 
+import android.location.Location
 import android.os.Bundle
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -15,6 +17,11 @@ import com.amosh.common.isOffline
 import com.amosh.feature.databinding.FragmentMainBinding
 import com.amosh.feature.ui.MainViewModel
 import com.amosh.feature.ui.contract.MainContract
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationResult
+import com.google.android.gms.location.LocationServices
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -31,19 +38,27 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
 
     private val viewModel: MainViewModel by activityViewModels()
 
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+
+    // globally declare LocationRequest
+    private lateinit var locationRequest: LocationRequest
+
+    // globally declare LocationCallback
+    private lateinit var locationCallback: LocationCallback
+
+
     private val adapter: SpotsAdapter by lazy {
-        SpotsAdapter({ spot ->
+        SpotsAdapter { spot ->
             val action = MainFragmentDirections.actionMainFragmentToDetailFragment(spot)
             findNavController().navigate(action)
-        }, {
-            getSpotsList()
-        })
+        }
     }
 
     override fun prepareView(savedInstanceState: Bundle?) {
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
         binding.rvSpots.adapter = adapter
         initObservers()
-        getSpotsList()
+        getLocationUpdates()
     }
 
     private fun initObservers() {
@@ -90,8 +105,60 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
         }
     }
 
-    private fun getSpotsList() {
-        viewModel.setEvent(MainContract.Event.OnFetchSpotsList)
+    private fun getSpotsList(location: Location) {
+        viewModel.setEvent(
+            MainContract.Event.OnFetchSpotsList(
+                lat = location.latitude,
+                lng = location.longitude
+            )
+        )
+    }
+
+    private fun getLocationUpdates() {
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
+        locationRequest = LocationRequest.create().apply {
+            interval = 50000
+            fastestInterval = 50000
+            smallestDisplacement = 1000f // 1 km
+            priority = LocationRequest.PRIORITY_HIGH_ACCURACY //set according to your app function
+        }
+        locationCallback = object : LocationCallback() {
+            override fun onLocationResult(locationResult: LocationResult) {
+                if (locationResult.locations.isNotEmpty()) {
+                    // get latest location
+                    val location = locationResult.lastLocation
+                    // use your location object
+                    // get latitude , longitude and other info from this
+                    getSpotsList(location)
+                }
+            }
+        }
+    }
+
+    //start location updates
+    private fun startLocationUpdates() {
+        fusedLocationClient.requestLocationUpdates(
+            locationRequest,
+            locationCallback,
+            Looper.getMainLooper()
+        )
+    }
+
+    // stop location updates
+    private fun stopLocationUpdates() {
+        fusedLocationClient.removeLocationUpdates(locationCallback)
+    }
+
+    // stop receiving location update when activity not visible/foreground
+    override fun onPause() {
+        super.onPause()
+        stopLocationUpdates()
+    }
+
+    // start receiving location update when activity  visible/foreground
+    override fun onResume() {
+        super.onResume()
+        startLocationUpdates()
     }
 }
 
